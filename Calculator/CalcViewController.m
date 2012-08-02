@@ -13,8 +13,9 @@
 @end
 
 @implementation CalcViewController
-@synthesize display;
+@synthesize display = _display;
 @synthesize isTypingNumber= _isTypingNumber;
+@synthesize model = _model;
 
 
 - (void)viewDidLoad
@@ -22,6 +23,7 @@
     [super viewDidLoad];
 
     self.isTypingNumber = NO;
+    self.model = [[CalculatorModel alloc] init];
 }
 
 - (void)viewDidUnload
@@ -56,37 +58,48 @@
 }
 
 - (IBAction)operationButtonPressed:(UIButton *)sender {
-    
+    NSString *operator = sender.titleLabel.text;
+
     if (self.isTypingNumber) {
         
         double currentNumber =[self.display.text doubleValue];
-        NSLog(@"CurrentNumber: %f",currentNumber);
+        
+        if ([operator isEqualToString:@"="]) {
+            double result = [self.model performOperationWithOperand:(currentNumber)];
+            NSLog(@"Result %f", result);
+        } else {
+            self.model.waitingOperand = currentNumber;
+            self.model.operation = operator;
+        }
+        
+        
+        
+
         self.isTypingNumber = NO;
         
     }
     
-    NSString *operator = sender.titleLabel.text;
-    if ([operator isEqualToString:@"*"])
-    {
-        NSLog(@"Multiply");
-    } else if ([operator isEqualToString:@"/"])
-    {
-        NSLog(@"Divide");
-    } else if ([operator isEqualToString:@"-"])
-    {
-        NSLog(@"Subtract");
-    } else if ([operator isEqualToString:@"+"])
-    {
-        NSLog(@"Add");
-    }else if ([operator isEqualToString:@"="])
-    {
-        NSLog(@"Equal");
-    }
-
-
+//    if ([operator isEqualToString:@"*"])
+//    {
+//        NSLog(@"Multiply");
+//    } else if ([operator isEqualToString:@"/"])
+//    {
+//        NSLog(@"Divide");
+//    } else if ([operator isEqualToString:@"-"])
+//    {
+//        NSLog(@"Subtract");
+//    } else if ([operator isEqualToString:@"+"])
+//    {
+//        NSLog(@"Add");
+//    }else if ([operator isEqualToString:@"="])
+//    {
+//        NSLog(@"Equal");
+//    }
+//
+}
 
         
-}
+
 
     
 @end
