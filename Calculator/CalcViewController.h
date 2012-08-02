@@ -10,4 +10,11 @@
 
 @interface CalcViewController : UIViewController
 
+- (IBAction)numberButtonPressed:(UIButton *)sender;
+
+- (IBAction)operationButtonPressed:(UIButton *)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *display;
+@property (nonatomic) BOOL isTypingNumber;
+
 @end
