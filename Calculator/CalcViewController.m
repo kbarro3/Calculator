@@ -46,7 +46,9 @@
     //check to see if you are typing.  The typing number is YES
     if (self.isTypingNumber) {
         //If we are typing a number we append the title of the button
+        
         NSString *newDisplay = [self.display.text stringByAppendingFormat:@"%@",sender.titleLabel.text];
+        
         self.display.text = newDisplay;
     } 
     //Otherwise, if the typing number is NO
@@ -60,42 +62,21 @@
 - (IBAction)operationButtonPressed:(UIButton *)sender {
     NSString *operator = sender.titleLabel.text;
 
-    if (self.isTypingNumber) {
+    //if (self.isTypingNumber) {
         
         double currentNumber =[self.display.text doubleValue];
         
         if ([operator isEqualToString:@"="]) {
             double result = [self.model performOperationWithOperand:(currentNumber)];
-            NSLog(@"Result %f", result);
+            self.display.text = [NSString stringWithFormat:@"%f",result];
         } else {
             self.model.waitingOperand = currentNumber;
             self.model.operation = operator;
         }
-        
-        
-        
 
         self.isTypingNumber = NO;
-        
-    }
     
-//    if ([operator isEqualToString:@"*"])
-//    {
-//        NSLog(@"Multiply");
-//    } else if ([operator isEqualToString:@"/"])
-//    {
-//        NSLog(@"Divide");
-//    } else if ([operator isEqualToString:@"-"])
-//    {
-//        NSLog(@"Subtract");
-//    } else if ([operator isEqualToString:@"+"])
-//    {
-//        NSLog(@"Add");
-//    }else if ([operator isEqualToString:@"="])
-//    {
-//        NSLog(@"Equal");
-//    }
-//
+    //}
 }
 
         

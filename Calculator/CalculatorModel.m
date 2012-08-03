@@ -19,22 +19,22 @@
     
     if ([self.operation isEqualToString:@"*"])
     {
-        NSLog(@"Multiply");
+        result = self.waitingOperand * newOperand;
+        
     } else if ([self.operation isEqualToString:@"/"])
     {
-        NSLog(@"Divide");
+        result = self.waitingOperand / newOperand;
+        
     } else if ([self.operation isEqualToString:@"-"])
     {
-        NSLog(@"Subtract");
+        result = self.waitingOperand - newOperand;
+        
     } else if ([self.operation isEqualToString:@"+"])
     {
-        NSLog(@"Add");
-    }else if ([self.operation isEqualToString:@"="])
-    {
-        NSLog(@"Equal");
+        result = self.waitingOperand + newOperand;
     }
     
-    return 0.0;
+    return result;
 
 }
 @end
